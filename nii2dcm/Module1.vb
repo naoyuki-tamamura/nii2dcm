@@ -19,7 +19,7 @@ Module Module1
         Dim FileName As String = Path.GetFileNameWithoutExtension(SourceFilePath)
         Dim dcmFilePath As String = Path.ChangeExtension(SourceFilePath, "dcm")
 
-        If System.IO.File.Exists(SourceFilePath) = False Then
+        If File.Exists(SourceFilePath) = False Then
             Console.WriteLine(SourceFilePath & " が見つかりません。")
             Environment.Exit(2)
         ElseIf System.IO.File.Exists(dcmFilePath) = True Then
@@ -201,23 +201,23 @@ Module Module1
         End Using
 
         Dim DestRescale As Single
-        If 32768 / MaxValue >= 10000 Then
+        If 32767 / MaxValue >= 10000 Then
             DestRescale = 10000
-        ElseIf 32768 / MaxValue >= 1000 Then
+        ElseIf 32767 / MaxValue >= 1000 Then
             DestRescale = 1000
-        ElseIf 32768 / MaxValue >= 100 Then
+        ElseIf 32767 / MaxValue >= 100 Then
             DestRescale = 100
-        ElseIf 32768 / MaxValue >= 10 Then
+        ElseIf 32767 / MaxValue >= 10 Then
             DestRescale = 10
-        ElseIf 32768 / MaxValue >= 1 Then
+        ElseIf 32767 / MaxValue >= 1 Then
             DestRescale = 1
-        ElseIf 32768 / MaxValue >= 0.1 Then
+        ElseIf 32767 / MaxValue >= 0.1 Then
             DestRescale = 0.1
-        ElseIf 32768 / MaxValue >= 0.01 Then
+        ElseIf 32767 / MaxValue >= 0.01 Then
             DestRescale = 0.01
-        ElseIf 32768 / MaxValue >= 0.001 Then
+        ElseIf 32767 / MaxValue >= 0.001 Then
             DestRescale = 0.001
-        ElseIf 32768 / MaxValue >= 0.0001 Then
+        ElseIf 32767 / MaxValue >= 0.0001 Then
             DestRescale = 0.0001
         End If
 
@@ -292,7 +292,7 @@ Module Module1
         dataset.Validate()
 
         Dim dicomFile As New DicomFile(dataset)
-        dicomFile.FileMetaInfo.SourceApplicationEntityTitle = "My"
+        dicomFile.FileMetaInfo.SourceApplicationEntityTitle = "nii2dcm"
 
         dicomFile.Save(dcmFilePath)
 
