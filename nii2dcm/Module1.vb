@@ -278,8 +278,8 @@ Module Module1
         For Z = 0 To SliceCount - 1
             Dim Slice As New List(Of Byte)
 
-            For Y = 0 To MatrixY - 1
-                For X = 0 To MatrixX - 1
+            For Y = MatrixY - 1 To 0 Step -1
+                For X = MatrixX - 1 To 0 Step -1
                     Dim CurrentPixel() As Byte = BitConverter.GetBytes(CShort(Truncate(ImageBuff(Z, Y, X) * DestRescale)))
                     Slice.Add(CurrentPixel(0))
                     Slice.Add(CurrentPixel(1))
